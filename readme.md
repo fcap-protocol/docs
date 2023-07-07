@@ -1,6 +1,11 @@
-# FC-IoT Whitepaper
+# FCAP Whitepaper
+> This project is WIP, these docs are not complete
+
+## Problem Statement
+All existing iot protocols ...
 
 ## Goal
+A layer-2 independent, Flexible and Constrained Application Protocol.
 
 ### Protocol Requirements
 
@@ -22,7 +27,6 @@
         - optional feature
         - inspired by G-code
 
-
 ### Implementation Requirements
 
 1. Modular implementation
@@ -35,6 +39,8 @@
         - can daisy chain different physical layers without re-work
 
 ## Existing Solutions
+The following outlines some of the areas of inspiration for this protocol, separated loosely by application and transport layer. 
+Both areas are considered as this protocol aims ...
 
 ### Application
 
@@ -61,6 +67,10 @@
     - lots of dependencies
         - freertos
         - dns client
+
+- [gRPC]()
+    - only works for point to point communication 
+    - ...
 
 
 ### Transport
