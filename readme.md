@@ -1,4 +1,4 @@
-# Readme - (insert name here)
+# FC-IoT Whitepaper
 
 ## Goal
 
