@@ -2,12 +2,19 @@
 > This project is WIP, these docs are not complete
 
 ## Problem Statement
-All existing iot protocols ...
+Most existing embedded and constrained network protocols are tied to a specific datalink, network and transport implementation, or the barrier to implementation on a new layer is too high. 
+In other words, in the world of highly constrained embedded systems, there is typically only a physical layer, data link layer and application layer. Subsequently, vendors of IOT devices and systems often end up implementing and building their own, proprietary and restricted systems.
 
-## Goal
-A layer-2 independent, Flexible and Constrained Application Protocol.
 
-### Protocol Requirements
+## Goal & Requirements
+**Goal:** To develop a super lightweight and modular library, which provides an application layer protocol capable of working on any data link layer
+
+ - Lightweight -> refers to the minimum viable library size in kB to provide the application layer protocol
+ - Modular -> Ability to easily add middleware to provide additional features such as reliability, encryption, routing, etc...
+
+Some further requirements are outlined below
+
+### Application Protocol Requirements
 
 1. Optimized for micro-controller 
     - In a constrained environments
@@ -16,35 +23,41 @@ A layer-2 independent, Flexible and Constrained Application Protocol.
 2. Application independent
     - Packet structure must be able to be used for any context
     - e.g. MySensors can ONLY send IOT data
-    - Users should be able to define their own API / message structure, but the library should provide a consistent encoding (see below)
+    - Users should be able to define their own API / message structure, but the library should provide a consistent encoding
         - Library provides a set of data fields, and the user and use them for whatever they want
-        - Look at how HTTP use defined
-    - Library should provide the request life-cycle (request-response-drop)
-    - basically a small version of http
-    - support for raw binary data types (normal)
-    - support for ascii formats 
+        - Similar to how HTTP use defined
+    - Library should provide a request life-cycle (request-response)
+        - basically a small version of http
+    - support for raw binary data types
+    - (maybe) support for ascii formats 
         - ability to send human readable ascii version of a given message
         - optional feature
         - inspired by G-code
 
-### Implementation Requirements
+### Framework Requirements
 
-1. Modular implementation
+1. Flexible implementation
     - ability to support middleware
 
-2. Transmission methods are typically not abstracted
+2. Link Layer Independent
     - current solutions are strict / limited on a single transport layer (e.g. HTTP always on tcp/ip even tho theoretically possible on anything)
     - this helps to make the library more usable in constrained environments (cost or hardware or other reasons legal)
     - ability to forward packets between physical layers
         - can daisy chain different physical layers without re-work
+        - maybe this can be a middleware?
+
+
+The typical network stack diagram is shown below for reference throughout this documentation. ([Source](https://www.a10networks.com/glossary/osi-network-model-and-types-of-load-balancers/))
+<p align="center">
+    <img src="docs/network-stack.webp" width=500 alignment="centre">
+</p>
 
 ## Existing Solutions
-The following outlines some of the areas of inspiration for this protocol, separated loosely by application and transport layer. 
-Both areas are considered as this protocol aims ...
+The following outlines some of the areas of inspiration for this protocol, separated loosely by application and transport layer.
 
-### Application
+### Application Layer
 
-- HTTP 
+- [HTTP] (https://httpwg.org/specs/)
     - the success of http as an application layer protocol fit for any purpose, has inspired many of the features of this protocol
 
 - [COAP](https://en.wikipedia.org/wiki/Constrained_Application_Protocol)
@@ -68,16 +81,16 @@ Both areas are considered as this protocol aims ...
         - freertos
         - dns client
 
-- [gRPC]()
+- [gRPC](https://grpc.io/)
     - only works for point to point communication 
-    - ...
+    - TODO
 
 
-### Transport
+### Transport Layer / Framework
 
 There exists many protocols which simply provide transmission layer infrastructure (layers 2-4) such as the following:
 
-* [Radio Head](https://github.com/jecrespo/RadioHead)
+- [Radio Head](https://github.com/jecrespo/RadioHead)
     - only has a specific list of harware drivers
     - Provides
         - Packet Structures
@@ -85,9 +98,9 @@ There exists many protocols which simply provide transmission layer infrastructu
         - Routing
         - Reliability
         - Mesh networking
-    - *All kind of stuff that should be able to sit in a middleware layer of this protocol*
+    - *This is the kind of stuff that should be able to sit in a middleware layer of this protocol*
 
-* [Lora WAN](https://lora-alliance.org/about-lorawan/)
+- [Lora WAN](https://lora-alliance.org/about-lorawan/)
     - Very complex
     - More here
 
@@ -95,11 +108,11 @@ There exists many protocols which simply provide transmission layer infrastructu
     - Transport protocol
     - could be used as a middleware layer in lwiot
 
-* more research needed...
+- more research needed...
 
-In summary, there are library which abstract the radio from the user just sending arbitary byte arrays, however there isn't anything which deals with it after that. I.e. I might want to send a 'dictionary' of key-value pairs in a request-response pattern. The library should do that.
+In summary, there are library which abstract the physical layer from the user just sending arbitrary byte arrays, however there isn't anything which deals with it after that. I.e. I might want to send a 'dictionary' of key-value pairs in a request-response pattern. The library should do that.
 
-### Our Solution
+### Proposed Solution
 
 * Primarily addressing the application layer for embedded devices. **Layer 7**
 
@@ -117,22 +130,13 @@ In summary, there are library which abstract the radio from the user just sendin
     - All existing RF networks in production, typically use custom application specific protocols
     - E.g. ZigBee (proprietary license), RF Blinds, Weather 
 
+- Home Automation networks
 
-## Features
-- TLV format
-- middleware functionality
-- No dependencies
-- simple integration
-    - only 2 functions to implement, send & receive bytes
-
-### MVP
+### MVP (WIP)
 - c-library
 - Basic request/response of raw bytes
 - interpret basic tlv packets
-
-
-### Stretch
-- 
+- ...
 
 ## TODO
 
@@ -140,8 +144,8 @@ In summary, there are library which abstract the radio from the user just sendin
 - example on udp
 - example on serial
 - relay middleware
-
-
 - Example on IR 
     - Reliability middle ware
         - everything is TCP
+- ...
+
