@@ -1,5 +1,7 @@
 # FCAP Whitepaper
+**F**lexible & **C**onstrained **A**pplication **P**rotocol (and more).
 > This project is WIP, these docs are not complete
+
 
 ## Problem Statement
 Most existing embedded and constrained network protocols are tied to a specific datalink, network and transport implementation, or the barrier to implementation on a new layer is too high. 
