@@ -59,7 +59,7 @@ The following outlines some of the areas of inspiration for this protocol, separ
 
 ### Application Layer
 
-- [HTTP] (https://httpwg.org/specs/)
+- [HTTP](https://httpwg.org/specs/)
     - the success of http as an application layer protocol fit for any purpose, has inspired many of the features of this protocol
 
 - [COAP](https://en.wikipedia.org/wiki/Constrained_Application_Protocol)
@@ -108,7 +108,7 @@ There exists many protocols which simply provide transmission layer infrastructu
 
 - [lwIP](https://savannah.nongnu.org/projects/lwip/)
     - Transport protocol
-    - could be used as a middleware layer in lwiot
+    - could be used as a middleware layer in PCAP
 
 - more research needed...
 
