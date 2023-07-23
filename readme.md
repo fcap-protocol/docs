@@ -18,7 +18,7 @@ Some further requirements are outlined below
 
 ### Application Protocol Requirements
 
-1. Optimized for micro-controller 
+1. Optimized for micro-controllers 
     - In a constrained environments
     - Memory constrained
 
@@ -39,7 +39,8 @@ Some further requirements are outlined below
 ### Framework Requirements
 
 1. Flexible implementation
-    - ability to support middleware
+    - ability to support custom middleware
+    - should be optionally compiled in to minimize library size where needed
 
 2. Link Layer Independent
     - current solutions are strict / limited on a single transport layer (e.g. HTTP always on tcp/ip even tho theoretically possible on anything)
@@ -93,7 +94,7 @@ The following outlines some of the areas of inspiration for this protocol, separ
 There exists many protocols which simply provide transmission layer infrastructure (layers 2-4) such as the following:
 
 - [Radio Head](https://github.com/jecrespo/RadioHead)
-    - only has a specific list of harware drivers
+    - only has a specific list of hardware drivers
     - Provides
         - Packet Structures
             - only length, to, from and a blank payload section
@@ -104,13 +105,12 @@ There exists many protocols which simply provide transmission layer infrastructu
 
 - [Lora WAN](https://lora-alliance.org/about-lorawan/)
     - Very complex
+    - Large library size
     - More here
 
 - [lwIP](https://savannah.nongnu.org/projects/lwip/)
     - Transport protocol
     - could be used as a middleware layer in PCAP
-
-- more research needed...
 
 In summary, there are library which abstract the physical layer from the user just sending arbitrary byte arrays, however there isn't anything which deals with it after that. I.e. I might want to send a 'dictionary' of key-value pairs in a request-response pattern. The library should do that.
 
@@ -133,6 +133,8 @@ In summary, there are library which abstract the physical layer from the user ju
     - E.g. ZigBee (proprietary license), RF Blinds, Weather 
 
 - Home Automation networks
+
+- Rapid prototyping of device-to-device communication, as users can focus on application layer
 
 ### MVP (WIP)
 - c-library
