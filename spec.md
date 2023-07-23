@@ -1,8 +1,5 @@
-# Packet Structure
-
-At its very core, the minimum requirement for a packet is:
-* 1x Header
-* \>= 1 key-type-value (KTV)
+# Protocol Specification
+The below outlines the protocol specification. Including packet format and any implementation requirements.
 
 ## Assumptions
 * Datalink will indicate start of packet
@@ -11,9 +8,15 @@ At its very core, the minimum requirement for a packet is:
 * Meaningful values are 1-byte aligned to simplify the encoding and decoding
 * Multi-byte values are big-endian to align with the [TCP/IP RFC 1700](https://www.rfc-editor.org/rfc/rfc1700) standard
 
-## Format
+# Packet Format
 
-### Header
+At its very core, the minimum requirement for a packet is:
+* 1x Header
+* \>= 1 key-type-value (KTV)
+
+<img src="docs/format.png">
+
+## Header
 
 The header is always 1 byte and contains the following sections
 * version
@@ -26,7 +29,7 @@ Potential Changes
 <img src="docs/header_format.png">
 
 
-#### **Version**
+### Version
 **Type:** 4-bit enum
 
 **Description:** The version of the protocol this packet aligns to.
@@ -44,7 +47,7 @@ The versions are outlined below for verbosity.
 | 6 | 110 |
 | 7 | 111 |
 
-#### **RTR**
+### RTR
 
 **Type:** 1-bit boolean
 
@@ -58,7 +61,7 @@ For example, if the user is requesting key 1 with type uint8, and key 6 with typ
 
 <img src="docs/rtr_example.png">
 
-#### **Number of Keys**
+### Number of Keys
 
 **Type:** uint4
 
@@ -77,7 +80,7 @@ A binary typed KTV has the following packet format
 
 <img src="docs/ktv_format_binary.png">
 
-#### **Key**
+### Key
 
 **Type:** 4-bit enum
 
@@ -85,7 +88,7 @@ A binary typed KTV has the following packet format
 
 There are 16 available unique keys for the user to use. 0-15 inclusive. Each key can only exist once in each packet.
 
-#### **Type**
+### Type
 
 **Type:** 4-bit enum
 
@@ -107,7 +110,7 @@ There are 10 types available for the user to use. These are outlined below. Note
 | 9-15  | reserved  | reserved    | reserved|
 
 
-#### **Value**
+### Value
 
 **Type:** N/A
 
