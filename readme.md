@@ -2,11 +2,12 @@
 **F**lexible & **C**onstrained **A**pplication **P**rotocol (and more).
 > This project is WIP, these docs are not complete
 
+## Spec
+The protocol specification can be found [here](spec.md).
 
 ## Problem Statement
 Most existing embedded and constrained network protocols are tied to a specific datalink, network and transport implementation, or the barrier to implementation on a new layer is too high. 
 In other words, in the world of highly constrained embedded systems, there is typically only a physical layer, data link layer and application layer. Subsequently, vendors of IOT devices and systems often end up implementing and building their own, proprietary and restricted systems.
-
 
 ## Goal & Requirements
 **Goal:** To develop a super lightweight and modular library, which provides an application layer protocol capable of working on any data link layer
