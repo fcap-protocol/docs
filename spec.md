@@ -67,7 +67,7 @@ For example, if the user is requesting key 1 with type uint8, and key 6 with typ
 
 **Description:** The number of KTVs within this packet. This, along with the rtr status, is used to determine the length of the packet.
 
-### KTV
+## KTV
 
 Each KTV contains a unique key, the data type of the value and the value itself. The key is unique amongst other keys, and must be one of the pre-defined keys outlined below. Any key can have any type. A key can only appear once in a given packet.
 
