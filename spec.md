@@ -39,13 +39,10 @@ The versions are outlined below for verbosity.
 | Version | Binary | Notes |
 |---------|--------|-------|
 | undef | 000 | Will match any packet with any version, used for development |
-| 1 | 001 | 
-| 2 | 010 |
-| 3 | 011 |
-| 4 | 100 |
-| 5 | 101 |
-| 6 | 110 |
-| 7 | 111 |
+| 1 | 01 | 
+| 2 | 10 |
+| 3 | 11 |
+
 
 ### RTR
 
@@ -63,7 +60,7 @@ For example, if the user is requesting key 1 with type uint8, and key 6 with typ
 
 ### Number of Keys
 
-**Type:** uint4
+**Type:** uint5
 
 **Description:** The number of KTVs within this packet. This, along with the rtr status, is used to determine the length of the packet.
 
@@ -82,32 +79,30 @@ A binary typed KTV has the following packet format
 
 ### Key
 
-**Type:** 4-bit enum
+**Type:** uint5
 
 **Description:** Unique key to identify information
 
-There are 16 available unique keys for the user to use. 0-15 inclusive. Each key can only exist once in each packet.
+There are 32 available unique keys for the user to use. 0-31 inclusive. Each key can only exist once in each packet.
 
 ### Type
 
-**Type:** 4-bit enum
+**Type:** 3-bit enum
 
 **Description:** The data type the following value should be interpreted as.
 
-There are 10 types available for the user to use. These are outlined below. Note that the 0 type is binary and allows the user to send up to 2^8 number of bytes in a single value blob. Therefore, if the user used all 15 keys as binary, they would be able to send 16*2^8 number of bytes of user data.
+There are 8 types available for the user to use. These are outlined below. Note that the 0 type is binary and allows the user to send up to 2^8 number of bytes in a single value blob. Therefore, if the user used all 32 keys as binary, they would be able to send 32*2^8 number of bytes of user data. Both clients must be configured to support this.
 
 | enum  (decimal) | enum (binary) | type| length (bytes) |
-|-------|-------|-----------|-----|
-| 0     | 0000  | binary    | N/A |
-| 1     | 0001  | uint8     | 1   |
-| 2     | 0010  | uint16    | 2   |
-| 3     | 0011  | int16     | 2   |
-| 4     | 0100  | uint32    | 4   |
-| 5     | 0101  | int32     | 4   |
-| 6     | 0110  | uint64    | 8   |
-| 7     | 0111  | int64     | 8   |
-| 8     | 1000  | float     | 4   |
-| 9-15  | reserved  | reserved    | reserved|
+|-------|------|-----------|-----|
+| 0     | 000  | binary    | N/A |
+| 1     | 001  | uint8     | 1   |
+| 2     | 010  | uint16    | 2   |
+| 3     | 011  | int16     | 2   |
+| 4     | 100  | uint32    | 4   |
+| 5     | 101  | int32     | 4   |
+| 7     | 110  | float     | 4   |
+| 8     | 111  | double    | 4   |
 
 
 ### Value
