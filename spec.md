@@ -101,8 +101,8 @@ There are 8 types available for the user to use. These are outlined below. Note 
 | 3     | 011  | int16     | 2   |
 | 4     | 100  | uint32    | 4   |
 | 5     | 101  | int32     | 4   |
-| 7     | 110  | float     | 4   |
-| 8     | 111  | double    | 4   |
+| 6     | 110  | float     | 4   |
+| 7     | 111  | double    | 4   |
 
 
 ### Value
