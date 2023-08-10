@@ -34,14 +34,6 @@ Potential Changes
 
 **Description:** The number of KTVs within this packet. This, along with the rtr status, is used to determine the length of the packet.
 
-### ext
-
-**Type:** 1-bit boolean
-
-**Description:** Does this packet contain a message ID for requst or response
-
-If this bit is set, then the header is 2 bytes long and contains the extended message ID and message type. Else the header is only 1 byte long and acts as a 'broadcast' packet.
-
 ### Version
 **Type:** 4-bit enum
 
@@ -65,7 +57,9 @@ The versions are outlined below for verbosity.
 
 **Type:** uint7
 
-**Description:** A cyclic count of requests from the sender. When responding to a message, it will set this to the ID of the message it is responding to.
+**Description:** A cyclic count of requests from the sender. When responding to a message, it will set this to the ID of the message it is responding to. 
+
+A special ID of 0 is used for broadcast packets
 
 ### Message type
 
